@@ -18,12 +18,9 @@ public class IoBoundApplicationV2 {
         try (ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
 
             for (int i = 0; i < NUMBER_OF_TASKS; i++) {
-                executorService.submit(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (int j = 0; j < 100; j++) {
-                            blockingIoOperation();
-                        }
+                executorService.submit(() -> {
+                    for (int j = 0; j < 100; j++) {
+                        blockingIoOperation();
                     }
                 });
             }
